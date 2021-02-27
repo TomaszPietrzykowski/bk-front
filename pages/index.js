@@ -1,7 +1,7 @@
 import Head from "next/head";
 import styles from "../styles/Layout.module.css";
 
-export default function Home() {
+export default function Home({ articles }) {
   return (
     <div>
       <Head>
@@ -14,7 +14,23 @@ export default function Home() {
         <h1 className={styles.title}>
           Tomasz rocks <a href="https://nextjs.org">Next.js!</a>
         </h1>
+        {articles.map((article) => (
+          <h3 key={article.title}>{article.title}</h3>
+        ))}
       </main>
     </div>
   );
 }
+
+export const getStaticProps = async () => {
+  const res = await fetch(
+    "https://jsonplaceholder.typicode.com/posts?_limit=6"
+  );
+  const articles = await res.json();
+
+  return {
+    props: {
+      articles,
+    },
+  };
+};

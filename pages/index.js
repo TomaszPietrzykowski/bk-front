@@ -1,5 +1,6 @@
 import Head from "next/head";
 import styles from "../styles/Layout.module.css";
+import ArticleList from "../components/ArticleList";
 
 export default function Home({ articles }) {
   return (
@@ -14,9 +15,7 @@ export default function Home({ articles }) {
         <h1 className={styles.title}>
           Tomasz rocks <a href="https://nextjs.org">Next.js!</a>
         </h1>
-        {articles.map((article) => (
-          <h3 key={article.title}>{article.title}</h3>
-        ))}
+        <ArticleList articles={articles} />
       </main>
     </div>
   );
